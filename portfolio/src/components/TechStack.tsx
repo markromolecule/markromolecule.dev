@@ -4,6 +4,8 @@ const technologies = [
   { name: 'Laravel', category: 'Framework' },
   { name: 'Next.js', category: 'Framework' },
   { name: 'React Native', category: 'Mobile' },
+  { name: 'JavaScript', category: 'Programming Language' },
+  { name: 'Vanilla PHP', category: 'Backend' },
   { name: 'Tailwind CSS', category: 'Styling' },
   { name: 'PostgreSQL', category: 'Database' },
   { name: 'Git', category: 'Version Control' },
@@ -24,7 +26,7 @@ export function TechStack() {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-4 mt-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-12">
             {technologies.map((tech) => {
               const IconComponent = techIcons[tech.name];
               return (

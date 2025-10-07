@@ -4,6 +4,16 @@ const achievements = [
     title: 'Create & Conquer Hackathon',
     description: 'Secured 1st place in a competitive hackathon focused on developing innovative virtual assistant solutions.',
   },
+  {
+    year: '2024',
+    title: 'Dean’s List Recognition',
+    description: 'Achieved Dean’s List status for outstanding academic performance in Information Technology.',
+  },
+  {
+    year: '2022',
+    title: 'Hello, everyone!',
+    description: 'My first line of code',
+  }
 ];
 
 export function Achievements() {

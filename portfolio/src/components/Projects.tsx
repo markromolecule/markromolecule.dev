@@ -12,6 +12,13 @@ const projects = [
     github: 'https://github.com/markromolecule/LakbAI',
     demo: 'https://lakb-ai-two.vercel.app',
   },
+  {
+    title: 'Nexus',
+    description: 'This activity is a collaborative project where we work as a team to design and develop a simple gaming platform landing page. Each member is responsible for creating a uniquely styled landing page, while following a shared structure and design guidelines to ensure consistency and teamwork.',
+    tech: ['React', 'Tailwind CSS', 'JavaScript'],
+    github: 'https://github.com/markromolecule/Nexus',
+    demo: 'https://nexus-phi-three.vercel.app',
+  },
 ];
 
 export function Projects() {
