@@ -2,12 +2,12 @@ import { Button } from '@/components/ui/button';
 
 const certifications = [
   {
-    id: 'microsoft-databases',
-    title: 'Microsoft IT Specialist',
+    id: 'pearson-databases',
+    title: 'Pearson IT Specialist',
     subtitle: 'Databases',
     image: 'https://images.credly.com/images/49a492cd-5f72-4c9d-aafa-06649e4853fb/MicrosoftTeams-image__5_.png',
     url: 'https://www.credly.com/badges/e5c4ce97-eabc-44c4-9453-f0e970b1977d/public_url',
-    alt: 'Microsoft IT Specialist: Databases'
+    alt: 'Pearson IT Specialist: Databases'
   },
 ];
 
