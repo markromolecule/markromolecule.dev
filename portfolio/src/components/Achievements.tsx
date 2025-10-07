@@ -18,15 +18,15 @@ const achievements = [
 
 export function Achievements() {
   return (
-    <section id="achievements" className="py-20 bg-gray-50">
+    <section id="achievements" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-8 mb-16">
           <div className="space-y-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
               Achievements
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto rounded-full"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Key milestones and accomplishments in my development journey
             </p>
           </div>
@@ -52,15 +52,15 @@ export function Achievements() {
                 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200">
+                  <div className="bg-white dark:bg-black rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-800">
                     <div className="space-y-2">
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {achievement.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                         {achievement.description}
                       </p>
-                      <div className="text-sm text-blue-600 font-medium">
+                      <div className="text-sm text-blue-600 dark:text-blue-400 font-medium">
                         {achievement.year}
                       </div>
                     </div>

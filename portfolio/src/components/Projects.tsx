@@ -49,15 +49,15 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="py-20 bg-white">
+          <section id="projects" className="py-20 bg-white dark:bg-black">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-8 mb-16">
             <div className="space-y-4">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
                 Projects
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto rounded-full"></div>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                 A collection of projects showcasing my skills and experience
               </p>
             </div>
@@ -65,25 +65,25 @@ export function Projects() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-200">
-                <CardHeader>
-                  <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600 leading-relaxed">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
+                  <Card key={index} className="group hover:shadow-lg transition-all duration-200 dark:bg-gray-900 dark:border-gray-800">
+                    <CardHeader>
+                      <CardTitle className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
                 
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full font-medium"
-                      >
-                        {tech}
-                      </span>
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full font-medium"
+                        >
+                          {tech}
+                        </span>
                     ))}
                   </div>
                 </CardContent>
