@@ -1,5 +1,16 @@
 import { Button } from '@/components/ui/button';
 
+const certifications = [
+  {
+    id: 'microsoft-databases',
+    title: 'Microsoft IT Specialist',
+    subtitle: 'Databases',
+    image: 'https://images.credly.com/images/49a492cd-5f72-4c9d-aafa-06649e4853fb/MicrosoftTeams-image__5_.png',
+    url: 'https://www.credly.com/badges/e5c4ce97-eabc-44c4-9453-f0e970b1977d/public_url',
+    alt: 'Microsoft IT Specialist: Databases'
+  },
+];
+
 export function Hero() {
   const scrollToProjects = () => {
     const element = document.querySelector('#projects');
@@ -53,31 +64,37 @@ export function Hero() {
                   <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
                     Certified Professional
                   </p>
-              
-              <a 
-                href="https://www.credly.com/badges/e5c4ce97-eabc-44c4-9453-f0e970b1977d/public_url" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="flex items-center space-x-3 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 shadow-sm border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
-                  <img 
-                    src="https://images.credly.com/images/49a492cd-5f72-4c9d-aafa-06649e4853fb/MicrosoftTeams-image__5_.png" 
-                    alt="Microsoft IT Specialist: Databases" 
-                    className="w-12 h-12 object-contain"
-                  />
-                  <div className="text-left">
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                      Microsoft IT Specialist
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      Databases
-                    </p>
+                  
+                  {/* Dynamic Certifications */}
+                  <div className="flex flex-col sm:flex-row gap-4 items-center">
+                    {certifications.map((cert) => (
+                      <a 
+                        key={cert.id}
+                        href={cert.url} 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <div className="flex items-center space-x-3 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 shadow-sm border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+                          <img 
+                            src={cert.image} 
+                            alt={cert.alt} 
+                            className="w-12 h-12 object-contain"
+                          />
+                          <div className="text-left">
+                            <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                              {cert.title}
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                              {cert.subtitle}
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    ))}
                   </div>
                 </div>
-              </a>
-            </div>
-          </div>
+              </div>
         </div>
       </div>
     </section>
