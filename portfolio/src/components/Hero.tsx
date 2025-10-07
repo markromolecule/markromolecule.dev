@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { useState, useEffect } from 'react';
 
 const certifications = [
   {
@@ -11,7 +12,34 @@ const certifications = [
   },
 ];
 
+// Font families for random Joseph styling
+const fontFamilies = [
+  'font-serif', // Times, serif
+  'font-mono', // Monospace
+  'font-sans', // System sans-serif
+  'font-thin', // Ultra light
+  'font-extralight', // Extra light
+  'font-light', // Light
+  'font-normal', // Normal
+  'font-medium', // Medium
+  'font-semibold', // Semi bold
+  'font-bold', // Bold
+  'font-extrabold', // Extra bold
+  'font-black', // Black
+];
+
 export function Hero() {
+  const [currentFont, setCurrentFont] = useState('font-bold');
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * fontFamilies.length);
+      setCurrentFont(fontFamilies[randomIndex]);
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollToProjects = () => {
     const element = document.querySelector('#projects');
     if (element) {
@@ -26,7 +54,7 @@ export function Hero() {
           <div className="space-y-4">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
               Hi, I'm{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">
+              <span className={`text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 ${currentFont} transition-all duration-500`}>
                 Joseph
               </span>
             </h1>
