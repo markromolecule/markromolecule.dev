@@ -1,73 +1,93 @@
-# React + TypeScript + Vite
+# S4INT Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, minimalist portfolio website built with React, TypeScript, Tailwind CSS, and shadcn/ui.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Responsive Design**: Mobile-first approach with smooth responsive breakpoints
+- **Modern UI**: Clean, minimalist design with subtle animations
+- **Accessibility**: Semantic HTML and proper ARIA labels
+- **Performance**: Optimized build with Vite
+- **State Management**: Zustand for global UI state management
+- **Component Library**: shadcn/ui components for consistency
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 19, TypeScript
+- **Styling**: Tailwind CSS v4
+- **UI Components**: shadcn/ui, Radix UI
+- **State Management**: Zustand with Immer
+- **Build Tool**: Vite
+- **Icons**: Lucide React
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/           # Reusable components
+│   ├── ui/             # shadcn/ui components
+│   ├── Header.tsx      # Navigation header
+│   ├── Hero.tsx        # Hero section
+│   ├── About.tsx       # About section
+│   ├── TechStack.tsx   # Tech stack grid
+│   ├── Projects.tsx    # Projects showcase
+│   ├── Achievements.tsx # Achievements timeline
+│   └── Footer.tsx      # Footer
+├── stores/             # Zustand stores
+│   └── use-ui-store.ts # UI state management
+├── lib/                # Utilities
+│   └── utils.ts        # Helper functions
+└── App.tsx             # Main app component
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Sections
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Hero**: Name, tagline, and call-to-action buttons
+2. **About Me**: Personal introduction and background
+3. **Tech Stack**: Grid of technologies and tools
+4. **Projects**: Card-based project showcase
+5. **Achievements**: Timeline of accomplishments
+6. **Footer**: Contact information and social links
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm run dev
+
+# Build for production
+pnpm run build
+
+# Preview production build
+pnpm run preview
 ```
+
+## Design Principles
+
+- **Minimalist**: Clean, uncluttered interface
+- **Responsive**: Mobile-first design approach
+- **Accessible**: Semantic HTML and proper contrast
+- **Performance**: Optimized loading and smooth interactions
+- **Consistent**: Unified design system with shadcn/ui
+
+## Customization
+
+The portfolio is easily customizable:
+
+- Update personal information in component files
+- Modify the tech stack in `TechStack.tsx`
+- Add/remove projects in `Projects.tsx`
+- Update achievements in `Achievements.tsx`
+- Customize colors and styling in Tailwind classes
+
+## Deployment
+
+The project builds to static files that can be deployed to any static hosting service:
+
+- Vercel
+- Netlify
+- GitHub Pages
+- AWS S3 + CloudFront
