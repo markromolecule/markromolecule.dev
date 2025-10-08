@@ -5,6 +5,7 @@ import { TechStack } from '@/components/TechStack';
 import { Projects } from '@/components/Projects';
 import { Achievements } from '@/components/Achievements';
 import { Footer } from '@/components/Footer';
+import { ChatWidget } from '@/components/ChatWidget';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Achievements />
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

@@ -1,0 +1,52 @@
+export type GeminiChatServiceArgs = {
+  message: string;
+  conversationHistory?: Array<{ role: 'user' | 'assistant'; content: string }>;
+};
+
+export type GeminiChatServiceResult = {
+  response: string;
+  success: boolean;
+  error?: string;
+};
+
+export async function geminiChatService({
+  message,
+  conversationHistory = [],
+}: {
+  message: string;
+  conversationHistory?: Array<{ role: 'user' | 'assistant'; content: string }>;
+}): Promise<GeminiChatServiceResult> {
+  try {
+    // Call our secure backend API instead of Gemini directly
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message,
+        conversationHistory,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`Backend API error: ${response.status} - ${errorData.error || response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    return {
+      response: data.response,
+      success: data.success,
+      error: data.error,
+    };
+  } catch (error) {
+    console.error('Chat Service Error:', error);
+    return {
+      response: "I'm having trouble connecting right now. Please try again later.",
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+}
