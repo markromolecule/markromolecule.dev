@@ -20,8 +20,10 @@ export async function geminiChatService({
     // Use direct Gemini API call with client-side key
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     
+    console.log('API Key check:', apiKey ? 'Present' : 'Missing');
+    
     if (!apiKey) {
-      throw new Error('Gemini API key not configured');
+      throw new Error('Gemini API key not configured. Please set VITE_GEMINI_API_KEY in Vercel environment variables.');
     }
 
     const systemPrompt = `You are Joseph's AI assistant for his portfolio website. Help visitors learn about Joseph's skills, projects, and experience as a developer. 
