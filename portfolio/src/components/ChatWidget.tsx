@@ -76,6 +76,11 @@ export function ChatWidget() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 sm:bottom-6 sm:right-6">
+      {/* Crown Emoji - static decoration positioned absolutely */}
+      <div className="absolute -top-6 right-2 text-2xl transform rotate-12 pointer-events-none">
+        👑
+      </div>
+
       {isOpen ? (
         <div className={cn(
           // Base layout and dimensions - responsive sizing
