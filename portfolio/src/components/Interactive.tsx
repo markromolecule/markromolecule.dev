@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { MessageCircle, Sparkles, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { useUiStore } from '@/stores/use-ui-store';
 
 export function Interactive() {
   const commentsRef = useRef<HTMLDivElement>(null);
   const [showAllComments, setShowAllComments] = useState(false);
+  const { isDarkMode } = useUiStore();
 
   useEffect(() => {
     if (commentsRef.current && !commentsRef.current.querySelector('.giscus')) {
@@ -20,7 +22,7 @@ export function Interactive() {
       script.setAttribute('data-reactions-enabled', '1');
       script.setAttribute('data-emit-metadata', '0');
       script.setAttribute('data-input-position', 'top');
-      script.setAttribute('data-theme', 'preferred_color_scheme');
+      script.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
       script.setAttribute('data-lang', 'en');
       script.setAttribute('data-loading', 'lazy');
       script.crossOrigin = 'anonymous';
@@ -28,7 +30,24 @@ export function Interactive() {
 
       commentsRef.current.appendChild(script);
     }
-  }, []);
+  }, [isDarkMode]);
+
+  // Sync Giscus theme with dark mode toggle
+  useEffect(() => {
+    const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+    if (iframe) {
+      iframe.contentWindow?.postMessage(
+        {
+          giscus: {
+            setConfig: {
+              theme: isDarkMode ? 'dark' : 'light',
+            },
+          },
+        },
+        'https://giscus.app'
+      );
+    }
+  }, [isDarkMode]);
 
   // Add CSS to limit visible comments to 3
   useEffect(() => {
