@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MessageCircle, Sparkles, ChevronDown } from 'lucide-react';
+import { MessageCircle, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useUiStore } from '@/stores/use-ui-store';
@@ -49,28 +49,76 @@ export function Interactive() {
     }
   }, [isDarkMode]);
 
-  // Add CSS to limit visible comments to 3
+  // Add CSS to limit visible comments to 2 and ensure interactivity
   useEffect(() => {
+    const styleId = 'giscus-limit-style';
+    const existingStyle = document.getElementById(styleId);
+    
+    if (existingStyle) {
+      existingStyle.remove();
+    }
+
+    const style = document.createElement('style');
+    style.id = styleId;
+    
+    let cssRules = `
+      /* Ensure Giscus iframe is interactive and properly aligned */
+      #interactive {
+        transform: none !important;
+      }
+      .giscus-container {
+        pointer-events: auto !important;
+        position: relative !important;
+        z-index: 10 !important;
+        isolation: isolate !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+      }
+      .giscus-container iframe {
+        pointer-events: auto !important;
+        position: static !important;
+        z-index: 10 !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        overflow-x: hidden !important;
+        transform: none !important;
+        left: 0 !important;
+        right: 0 !important;
+      }
+      .giscus-container *, 
+      .giscus-container iframe * {
+        pointer-events: auto !important;
+      }
+      .giscus {
+        width: 100% !important;
+        max-width: 100% !important;
+        transform: none !important;
+      }
+    `;
+    
+    // Limit comments to 2 when not showing all
     if (!showAllComments) {
-      const style = document.createElement('style');
-      style.id = 'giscus-limit-style';
-      style.innerHTML = `
-        .giscus .giscus-comment:nth-child(n+4) {
+      cssRules += `
+        .giscus .giscus-comment:nth-child(n+3) {
           display: none !important;
         }
       `;
-      document.head.appendChild(style);
-    } else {
-      const existingStyle = document.getElementById('giscus-limit-style');
-      if (existingStyle) {
-        existingStyle.remove();
-      }
     }
+    
+    style.innerHTML = cssRules;
+    document.head.appendChild(style);
 
     return () => {
-      const existingStyle = document.getElementById('giscus-limit-style');
-      if (existingStyle) {
-        existingStyle.remove();
+      const styleToRemove = document.getElementById(styleId);
+      if (styleToRemove) {
+        styleToRemove.remove();
       }
     };
   }, [showAllComments]);
@@ -130,7 +178,9 @@ export function Interactive() {
         {/* Interactive Cards Grid */}
         <div className={cn(
           // Layout
-          'grid grid-cols-1 md:grid-cols-2 gap-6 mb-12'
+          'grid grid-cols-1 md:grid-cols-2 gap-6 mb-12',
+          // Isolation
+          'relative z-0'
         )}>
           {/* Visitors Card */}
           <div className={cn(
@@ -142,7 +192,9 @@ export function Interactive() {
             // Background
             'bg-white dark:bg-gray-900',
             // Transitions
-            'transition-all duration-200'
+            'transition-all duration-200',
+            // Isolation
+            'relative z-0'
           )}>
             <div className="flex items-center gap-3 mb-2">
               <MessageCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
@@ -175,7 +227,9 @@ export function Interactive() {
             // Background
             'bg-white dark:bg-gray-900',
             // Transitions
-            'transition-all duration-200'
+            'transition-all duration-200',
+            // Isolation
+            'relative z-0'
           )}>
             <div className="flex items-center gap-3 mb-2">
               <Sparkles className="h-6 w-6 text-purple-600 dark:text-purple-400" />
@@ -200,25 +254,47 @@ export function Interactive() {
         </div>
 
         {/* Giscus Comments Section */}
-        <div className={cn(
-          // Layout and spacing
-          'rounded-lg p-6 sm:p-8',
-          // Background
-          'bg-white dark:bg-gray-900',
-          // Borders and shadows
-          'border border-gray-200 dark:border-gray-800',
-          'shadow-sm',
-          // Animation
-          'animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200'
-        )}>
-          <div ref={commentsRef} className="giscus-container" />
+        <div 
+          className={cn(
+            // Layout and spacing
+            'rounded-lg p-6 sm:p-8',
+            // Background
+            'bg-white dark:bg-gray-900',
+            // Borders and shadows
+            'border border-gray-200 dark:border-gray-800',
+            'shadow-sm',
+            // Animation - using only fade to avoid transform issues
+            'animate-in fade-in duration-700 delay-200',
+            // Ensure no overflow issues and proper stacking
+            'overflow-visible relative z-10'
+          )}
+          style={{
+            transform: 'none !important',
+            willChange: 'auto'
+          }}
+        >
+          <div 
+            ref={commentsRef} 
+            className="giscus-container" 
+            style={{ 
+              minHeight: '200px',
+              width: '100%',
+              maxWidth: '100%',
+              position: 'relative',
+              zIndex: 10,
+              margin: 0,
+              padding: 0,
+              transform: 'none',
+              boxSizing: 'border-box'
+            }} 
+          />
           
-          {/* Show All Comments Button */}
-          {!showAllComments && (
-            <div className={cn(
-              // Layout
-              'mt-6 text-center'
-            )}>
+          {/* Show All/Less Comments Button */}
+          <div className={cn(
+            // Layout
+            'mt-6 text-center'
+          )}>
+            {!showAllComments ? (
               <Button
                 onClick={() => setShowAllComments(true)}
                 variant="outline"
@@ -235,8 +311,25 @@ export function Interactive() {
                 <ChevronDown className="h-4 w-4" />
                 Show all comments
               </Button>
-            </div>
-          )}
+            ) : (
+              <Button
+                onClick={() => setShowAllComments(false)}
+                variant="outline"
+                className={cn(
+                  // Layout and spacing
+                  'gap-2',
+                  // Colors
+                  'border-gray-300 dark:border-gray-600',
+                  'text-gray-700 dark:text-gray-300',
+                  // Hover states
+                  'hover:bg-gray-100 dark:hover:bg-gray-800'
+                )}
+              >
+                <ChevronUp className="h-4 w-4" />
+                Show less
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Call to Action */}
