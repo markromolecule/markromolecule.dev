@@ -106,7 +106,7 @@ export function Interactive() {
               // Colors
               'text-gray-900 dark:text-white'
             )}>
-              Interactive Space
+              Discussion Space
             </h2>
             <Sparkles className={cn(
               // Sizing and color
