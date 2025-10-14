@@ -10,6 +10,7 @@ const navigation = [
   { name: 'Tech Stack', href: '#tech-stack' },
   { name: 'Projects', href: '#projects' },
   { name: 'Achievements', href: '#achievements' },
+  { name: 'Interactive', href: '#interactive' },
 ];
 
 export function Header() {
