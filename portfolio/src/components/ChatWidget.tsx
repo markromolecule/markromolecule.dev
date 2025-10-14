@@ -138,7 +138,7 @@ export function ChatWidget() {
                     'max-w-[80%] p-3 rounded-lg',
                     // Layout
                     'flex items-start gap-2',
-                    // Conditional styling - neutral colors
+                    // Conditional styling with dark mode support
                     message.isUser
                       ? cn(
                           // User message styles - black background
@@ -146,9 +146,9 @@ export function ChatWidget() {
                           'flex-row-reverse'
                         )
                       : cn(
-                          // AI message styles - white background with black border
-                          'bg-white text-black',
-                          'border border-black'
+                          // AI message styles - adapts to theme
+                          'bg-white dark:bg-gray-700 text-black dark:text-white',
+                          'border border-black dark:border-gray-600'
                         )
                   )}
                 >
@@ -162,21 +162,23 @@ export function ChatWidget() {
             {isLoading && (
               <div className="flex justify-start">
                 <div className={cn(
-                  // Base styles - neutral colors
-                  'bg-white p-3 rounded-lg',
-                  'border border-black',
+                  // Base styles with dark mode support
+                  'bg-white dark:bg-gray-700 p-3 rounded-lg',
+                  'border border-black dark:border-gray-600',
                   // Layout
-                  'flex items-center gap-2'
+                  'flex items-center gap-2',
+                  // Text color
+                  'text-black dark:text-white'
                 )}>
                   <Bot className="h-4 w-4" />
                   <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-black rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-black dark:bg-white rounded-full animate-bounce"></div>
                     <div 
-                      className="w-2 h-2 bg-black rounded-full animate-bounce" 
+                      className="w-2 h-2 bg-black dark:bg-white rounded-full animate-bounce" 
                       style={{ animationDelay: '0.1s' }}
                     ></div>
                     <div 
-                      className="w-2 h-2 bg-black rounded-full animate-bounce" 
+                      className="w-2 h-2 bg-black dark:bg-white rounded-full animate-bounce" 
                       style={{ animationDelay: '0.2s' }}
                     ></div>
                   </div>
@@ -186,9 +188,9 @@ export function ChatWidget() {
 
             {error && (
               <div className={cn(
-                // Base styles - neutral error styling
-                'bg-white border border-black',
-                'p-3 rounded-lg text-sm text-black'
+                // Base styles with dark mode support
+                'bg-white dark:bg-gray-700 border border-black dark:border-gray-600',
+                'p-3 rounded-lg text-sm text-black dark:text-white'
               )}>
                 {error}
               </div>
@@ -199,10 +201,10 @@ export function ChatWidget() {
           <div className={cn(
             // Layout and spacing
             'flex gap-2 p-4',
-            // Borders
-            'border-t border-black',
-            // Background
-            'bg-white'
+            // Borders with dark mode support
+            'border-t border-gray-300 dark:border-gray-700',
+            // Background with dark mode support
+            'bg-white dark:bg-gray-800'
           )}>
             <input
               type="text"
@@ -214,12 +216,14 @@ export function ChatWidget() {
               className={cn(
                 // Base styles
                 'flex-1 px-3 py-2 text-sm',
-                // Borders and corners
-                'border border-black rounded-lg',
-                // Background and text
-                'bg-white text-black',
-                // Focus states
-                'focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent',
+                // Borders and corners with dark mode
+                'border border-gray-300 dark:border-gray-600 rounded-lg',
+                // Background and text with dark mode
+                'bg-white dark:bg-gray-700 text-black dark:text-white',
+                // Placeholder color
+                'placeholder:text-gray-500 dark:placeholder:text-gray-400',
+                // Focus states with dark mode
+                'focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent',
                 // Disabled state
                 'disabled:opacity-50 disabled:cursor-not-allowed'
               )}
@@ -231,8 +235,8 @@ export function ChatWidget() {
               className={cn(
                 // Base styles
                 'px-3 py-2',
-                // Colors - neutral black
-                'bg-black hover:bg-gray-800 text-white',
+                // Colors with dark mode support
+                'bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black',
                 // Disabled state
                 'disabled:opacity-50 disabled:cursor-not-allowed'
               )}
@@ -245,11 +249,11 @@ export function ChatWidget() {
         <Button
           onClick={toggleChat}
           className={cn(
-            // Base styles - neutral colors
-            'bg-white text-black border border-black',
+            // Base styles with dark mode support
+            'bg-white dark:bg-gray-800 text-black dark:text-white border border-black dark:border-gray-600',
             'px-4 py-2 rounded-lg shadow-sm',
-            // Hover effects
-            'hover:bg-black hover:text-white transition-all duration-200',
+            // Hover effects with dark mode
+            'hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all duration-200',
             // Typography
             'font-medium text-sm'
           )}
