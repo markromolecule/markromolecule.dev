@@ -6,6 +6,7 @@ import { Projects } from '@/components/Projects';
 import { Achievements } from '@/components/Achievements';
 import { Footer } from '@/components/Footer';
 import { ChatWidget } from '@/components/ChatWidget';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       </main>
       <Footer />
       <ChatWidget />
+      <Analytics />
     </div>
   );
 }
