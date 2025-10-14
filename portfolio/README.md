@@ -55,16 +55,21 @@ src/
 
 ### Environment Setup
 
-Create a `.env` file in the root directory with the following variable:
+Create a `.env` file in the root directory with the following variables:
 
 ```env
-# Gemini API Key (Server-side only - used by Vercel serverless function)
-GEMINI_API_KEY=your_gemini_api_key_here
+# For Development (local testing with pnpm run dev)
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+
+# For Production (Vercel deployment - add this in Vercel dashboard, not in .env)
+# GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 Get your API key from: https://makersuite.google.com/app/apikey
 
-**Important**: The API key is **NOT** prefixed with `VITE_` because it's used server-side in the `/api/chat.ts` serverless function, keeping it secure and hidden from the browser.
+**How it works:**
+- **Development** (`pnpm run dev`): Uses `VITE_GEMINI_API_KEY` to call Gemini directly from browser
+- **Production** (Vercel): Uses `GEMINI_API_KEY` in the secure `/api/chat.ts` serverless function
 
 ### Commands
 
