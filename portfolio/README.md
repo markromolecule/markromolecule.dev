@@ -19,6 +19,8 @@ A modern, minimalist portfolio website built with React, TypeScript, Tailwind CS
 - **State Management**: Zustand with Immer
 - **Build Tool**: Vite
 - **Icons**: Lucide React
+- **API**: Vercel Serverless Functions
+- **AI**: Google Gemini API (via secure backend)
 
 ## Project Structure
 
@@ -50,6 +52,21 @@ src/
 6. **Footer**: Contact information and social links
 
 ## Development
+
+### Environment Setup
+
+Create a `.env` file in the root directory with the following variable:
+
+```env
+# Gemini API Key (Server-side only - used by Vercel serverless function)
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+Get your API key from: https://makersuite.google.com/app/apikey
+
+**Important**: The API key is **NOT** prefixed with `VITE_` because it's used server-side in the `/api/chat.ts` serverless function, keeping it secure and hidden from the browser.
+
+### Commands
 
 ```bash
 # Install dependencies
@@ -85,9 +102,22 @@ The portfolio is easily customizable:
 
 ## Deployment
 
-The project builds to static files that can be deployed to any static hosting service:
+### Vercel (Recommended)
 
-- Vercel
-- Netlify
-- GitHub Pages
-- AWS S3 + CloudFront
+This portfolio uses Vercel serverless functions for the AI chat feature. To deploy:
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add the environment variable in Vercel dashboard:
+   - Key: `GEMINI_API_KEY`
+   - Value: Your Google Gemini API key
+4. Deploy!
+
+The serverless function in `/api/chat.ts` will automatically be deployed alongside your static site.
+
+### Other Platforms
+
+For other platforms (Netlify, GitHub Pages, AWS S3), you'll need to:
+- Set up your own backend API endpoint to handle the chat requests
+- Update the fetch URL in `src/services/chat/gemini-chat-service.ts`
+- Configure environment variables on your chosen platform
