@@ -37,13 +37,13 @@ export function About() {
           
           <div className="max-w-3xl mx-auto space-y-6">
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              I'm a third-year BS Information Technology student at NU Dasmariñas, 
-              passionate about building efficient and user-focused mobile and web applications.
+              Hello! I’m Mark Joseph Livado, a third-year BS Information Technology student at NU Dasmariñas 
+              with a strong passion for creating efficient, scalable, and user-centered mobile and web applications.
 
             </p>
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
              When I'm not coding, I enjoy exploring new technologies, building personal projects, 
-             and continuously learning to stay up-to-date with the latest trends in web development.
+             and continuously learning to stay up-to-date with the latest trends in mobile & web development.
             </p>
           </div>
         </div>
