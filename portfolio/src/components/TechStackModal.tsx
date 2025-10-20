@@ -3,24 +3,7 @@ import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import { techIcons } from '@/lib/tech-icons';
 import { cn } from '@/lib/utils';
-
-const technologies = [
-  { name: 'Next.js', category: 'Frontend' },
-  { name: 'JavaScript', category: 'Frontend' },
-  { name: 'React Native', category: 'Mobile' },
-  { name: 'Laravel', category: 'Backend' },
-  { name: 'Kotlin', category: 'Mobile' },
-  { name: 'Vanilla PHP', category: 'Backend' },
-  { name: 'Tailwind CSS', category: 'Frontend' },
-  { name: 'PostgreSQL', category: 'Database' },
-  { name: 'Git', category: 'Version Control' },
-  { name: 'Bootstrap', category: 'Frontend' },
-  { name: 'TypeScript', category: 'Frontend' },
-  { name: 'Express.js', category: 'Backend' },
-  { name: 'MySQL', category: 'Database' },
-  { name: 'Visual Studio Code', category: 'Development Tools' },
-  { name: 'Postman', category: 'Development Tools' },
-];
+import { useTechStackStore } from '@/stores/use-tech-stack';
 
 interface TechStackModalProps {
   isOpen: boolean;
@@ -28,14 +11,19 @@ interface TechStackModalProps {
 }
 
 export function TechStackModal({ isOpen, onClose }: TechStackModalProps) {
+  const technologies = useTechStackStore(state => state.technologies);
+  
   // Group technologies by category
-  const groupedTech = technologies.reduce((acc, tech) => {
-    if (!acc[tech.category]) {
-      acc[tech.category] = [];
-    }
-    acc[tech.category].push(tech);
-    return acc;
-  }, {} as Record<string, typeof technologies>);
+  const groupedTech = technologies
+    .filter(tech => tech.isVisible)
+    .sort((a, b) => a.order - b.order)
+    .reduce((acc, tech) => {
+      if (!acc[tech.category]) {
+        acc[tech.category] = [];
+      }
+      acc[tech.category].push(tech);
+      return acc;
+    }, {} as Record<string, typeof technologies>);
 
   const categories = Object.keys(groupedTech);
 

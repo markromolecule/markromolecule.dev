@@ -1,34 +1,21 @@
-import { useState } from 'react';
 import { techIcons } from '@/lib/tech-icons';
 import { Button } from '@/components/ui/button';
 import { TechStackModal } from './TechStackModal';
 import { cn } from '@/lib/utils';
 import { ChevronRight } from 'lucide-react';
-
-const technologies = [
-  { name: 'Next.js', category: 'Frontend' },
-  { name: 'JavaScript', category: 'Frontend' },
-  { name: 'React Native', category: 'Mobile' },
-  { name: 'Laravel', category: 'Backend' },
-  { name: 'Kotlin', category: 'Mobile' },
-  { name: 'Vanilla PHP', category: 'Backend' },
-  { name: 'Tailwind CSS', category: 'Frontend' },
-  { name: 'PostgreSQL', category: 'Database' },
-  { name: 'Git', category: 'Version Control' },
-  { name: 'Bootstrap', category: 'Frontend' },
-  { name: 'TypeScript', category: 'Frontend' },
-  { name: 'Express.js', category: 'Backend' },
-  { name: 'MySQL', category: 'Database' },
-  { name: 'Visual Studio Code', category: 'Development Tools' },
-  { name: 'Postman', category: 'Development Tools' },
-
-];
+import { useTechStackStore } from '@/stores/use-tech-stack';
 
 export function TechStack() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const technologies = useTechStackStore(state => state.technologies);
+  const visibleCount = useTechStackStore(state => state.visibleCount);
+  const isModalOpen = useTechStackStore(state => state.isModalOpen);
+  const setIsModalOpen = useTechStackStore(state => state.setIsModalOpen);
   
-  // Show only first 4 technologies by default
-  const visibleTechnologies = technologies.slice(0, 4);
+  // Show only first N technologies by default (based on visibleCount)
+  const visibleTechnologies = technologies
+    .filter(tech => tech.isVisible)
+    .sort((a, b) => a.order - b.order)
+    .slice(0, visibleCount);
   
   return (
     <>

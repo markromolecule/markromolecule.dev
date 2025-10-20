@@ -1,18 +1,19 @@
-import { 
-  SiLaravel, 
-  SiNextdotjs, 
-  SiReact, 
-  SiTailwindcss, 
-  SiPostgresql, 
-  SiGit, 
-  SiJavascript, 
+import {
+  SiLaravel,
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
+  SiPostgresql,
+  SiGit,
+  SiJavascript,
   SiPhp,
   SiBootstrap,
   SiTypescript,
   SiExpress,
   SiMysql,
   SiPostman,
-  SiKotlin
+  SiKotlin,
+  SiVite,
 } from 'react-icons/si';
 
 import { VscVscode } from "react-icons/vsc";
@@ -20,6 +21,8 @@ import { VscVscode } from "react-icons/vsc";
 export const techIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'Laravel': SiLaravel,
   'Next.js': SiNextdotjs,
+  'React': SiReact,
+  'Vite': SiVite,
   'React Native': SiReact,
   'Tailwind CSS': SiTailwindcss,
   'Bootstrap': SiBootstrap,
@@ -32,5 +35,6 @@ export const techIcons: Record<string, React.ComponentType<{ className?: string 
   'Express.js': SiExpress,
   'Visual Studio Code': VscVscode,
   'Postman': SiPostman,
-    'Kotlin': SiKotlin,
+  'Kotlin': SiKotlin,
+  'PHP': SiPhp,
 };

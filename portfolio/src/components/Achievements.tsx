@@ -1,27 +1,12 @@
-import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const achievements = [
-  {
-    year: '2025',
-    title: '🔥 Create & Conquer Hackathon',
-    description: 'Secured 1st place in a competitive hackathon focused on developing innovative virtual assistant solutions.',
-  },
-  {
-    year: '2024',
-    title: '📌 Dean\'s List Recognition',
-    description: 'Achieved Dean\'s List status for outstanding academic performance in Information Technology.',
-  },
-  {
-    year: '2022',
-    title: '👋 Hello, everyone!',
-    description: 'My first line of code',
-  },
-];
+import { useAchievementsStore } from '@/stores/use-achievements-store';
 
 export function Achievements() {
-  const [showAll, setShowAll] = useState(false);
+  const achievements = useAchievementsStore(state => state.achievements);
+  const showAll = useAchievementsStore(state => state.showAll);
+  const setShowAll = useAchievementsStore(state => state.setShowAll);
+  
   return (
     <section id="achievements" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,7 +60,7 @@ export function Achievements() {
             
             return (
               <div 
-                key={index} 
+                key={achievement.id} 
                 className={cn(
                   'relative transition-all duration-700 ease-in-out',
                   // Partial visibility for 3rd achievement when not showing all
