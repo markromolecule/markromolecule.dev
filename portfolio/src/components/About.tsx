@@ -1,3 +1,5 @@
+import { GitHubActivity } from '@/components/GithubActivity';
+
 export function About() {
   return (
     <section id="about" className="py-20 bg-white dark:bg-black">
@@ -37,7 +39,7 @@ export function About() {
           
           <div className="max-w-3xl mx-auto space-y-6">
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Hello! I’m Mark Joseph Livado, a third-year BS Information Technology student at NU Dasmariñas 
+              Hello! I'm Mark Joseph Livado, a third-year BS Information Technology student at NU Dasmariñas 
               with a strong passion for creating efficient, scalable, and user-centered mobile and web applications.
 
             </p>
@@ -45,6 +47,14 @@ export function About() {
              When I'm not coding, I enjoy exploring new technologies, building personal projects, 
              and continuously learning to stay up-to-date with the latest trends in mobile & web development.
             </p>
+            
+            {/* GitHub Activity Section */}
+            <div className="mt-12">
+              <GitHubActivity 
+                username="markromolecule" 
+                className="max-w-5xl mx-auto"
+              />
+            </div>
           </div>
         </div>
       </div>
