@@ -3,29 +3,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ExternalLink, Github } from 'lucide-react';
-
-const projects = [
-  {
-    title: 'LakbAI',
-    description: 'The project aims to modernize traditional jeepney transportation through a QR code–based checkpoint and fare system, enhanced with AI features for route prediction and fare optimization. Features include user authentication, QR code scanning, and payment integration.',
-    tech: ['React Native', 'Laravel', 'MySQL', 'Xendit'],
-    github: 'https://github.com/markromolecule/LakbAI',
-    demo: 'https://lakb-ai-two.vercel.app',
-  },
-  {
-    title: 'Nexus',
-    description: 'This activity is a collaborative project where we work as a team to design and develop a simple gaming platform landing page. Each member is responsible for creating a uniquely styled landing page, while following a shared structure and design guidelines to ensure consistency and teamwork.',
-    tech: ['React', 'Tailwind CSS', 'JavaScript'],
-    github: 'https://github.com/markromolecule/Nexus',
-    demo: 'https://nexus-phi-three.vercel.app',
-  },
-];
+import { useProjectStore } from '@/stores/use-projects-store';
 
 export function Projects() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [pendingUrl, setPendingUrl] = useState<string | null>(null);
   const [pendingType, setPendingType] = useState<'code' | 'demo' | null>(null);
-
+  const projects = useProjectStore(state => state.projects);
+  
   const handleLinkClick = (url: string, type: 'code' | 'demo') => {
     setPendingUrl(url);
     setPendingType(type);
@@ -102,7 +87,7 @@ export function Projects() {
                 
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
+                    {project.technologies.map((tech) => (
                         <span
                           key={tech}
                           className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full font-medium"
