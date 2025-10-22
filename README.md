@@ -1,6 +1,6 @@
 # Mark Joseph Livado | Portfolio
 
-This is the source code for my portfolio website: [https://markromolecule.dev](https://markromolecule.dev)
+This is the source code for my portfolio website: [markromolecule.dev](https://markromolecule.dev)
 
 ## Tech Stack
 
