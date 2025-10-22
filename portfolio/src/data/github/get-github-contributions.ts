@@ -32,9 +32,9 @@ function isGitHubEvent(event: unknown): event is GitHubEvent {
   );
 }
 
-export async function getGitHubContributionsData({
-  username,
-}: GetGitHubContributionsDataArgs): Promise<GetGitHubContributionsDataResponse> {
+export async function getGitHubContributionsData(
+  { username }: GetGitHubContributionsDataArgs
+): Promise<GetGitHubContributionsDataResponse> {
 
   const response = await fetch(
     `https://api.github.com/users/${username}/events/public?per_page=100`
@@ -43,7 +43,7 @@ export async function getGitHubContributionsData({
   if (!response.ok) {
     if (response.status === 404) {
       throw new Error(`Username ko: '${username}' not found`);
-    }
+    } 
     throw new Error(`API error shit ${response.status}`);
   }
 
@@ -55,12 +55,11 @@ function processGitHubEvents(
   events: unknown[],
   username: string
 ): GetGitHubContributionsDataResponse {
-
   // Show only the last 2 months instead of full year
   const endDate = new Date();
   const startDate = new Date();
-  startDate.setMonth(endDate.getMonth() - 2);
   
+  startDate.setMonth(endDate.getMonth() - 2);
   const contributionMap = new Map<string, number>();
   
   events.forEach(event => {
@@ -104,9 +103,13 @@ function processGitHubEvents(
 
 function getContributionLevel(count: number): 0 | 1 | 2 | 3 | 4 {
   if (count === 0) return 0;
-  if (count <= 3) return 1;  // 1-3 contributions show level 1
-  if (count <= 6) return 2;  // 4-6 contributions show level 2
-  if (count <= 10) return 3; // 7-10 contributions show level 3
+  // 1-3 contributions show level 1
+  if (count <= 3) return 1;
+  // 4-6 contributions show level 2  
+  if (count <= 6) return 2; 
+  // 7-10 contributions show level 3 
+  if (count <= 10) return 3; 
+  // 7-10 contributions show level 3
   return 4;  // 11+ contributions show level 4
 }
 
