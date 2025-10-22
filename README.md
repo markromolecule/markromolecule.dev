@@ -4,10 +4,10 @@ This is the source code for my portfolio website: [https://markromolecule.dev](h
 
 ## Tech Stack
 
-https://react.dev
-https://tailwindcss.com
-https://ui.shadcn.com
-https://zustand.docs.pmnd.rs/getting-started/introduction
+- [React](https://react.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+- [ShadCN UI](https://ui.shadcn.com)
+- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
 
 ## Getting Started
 
