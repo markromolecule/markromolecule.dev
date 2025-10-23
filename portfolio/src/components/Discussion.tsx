@@ -4,16 +4,17 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useUiStore } from '@/stores/use-ui-store';
 
-export function Interactive() {
+export function Discussion() {
   const commentsRef = useRef<HTMLDivElement>(null);
   const [showAllComments, setShowAllComments] = useState(false);
   const { isDarkMode } = useUiStore();
 
   useEffect(() => {
+  //TODO: Debug [Giscus] GET: https://giscus.app/api/discussions?repo=markromolecule%2Fportfolio&term=index&category=General&number=0&strict=false&last=15 404 (Not Found)
     if (commentsRef.current && !commentsRef.current.querySelector('.giscus')) {
       const script = document.createElement('script');
       script.src = 'https://giscus.app/client.js';
-      script.setAttribute('data-repo', 'markromolecule/portfolio');
+      script.setAttribute('data-repo', 'markromolecule/markromolecule.dev');
       script.setAttribute('data-repo-id', 'R_kgDOP-Bd6Q');
       script.setAttribute('data-category', 'General');
       script.setAttribute('data-category-id', 'DIC_kwDOP-Bd6c4CwnS5');
@@ -368,4 +369,3 @@ export function Interactive() {
     </section>
   );
 }
-

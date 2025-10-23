@@ -4,7 +4,7 @@ import { About } from '@/components/About';
 import { TechStack } from '@/components/TechStack';
 import { Projects } from '@/components/Projects';
 import { Achievements } from '@/components/Achievements';
-import { Interactive } from '@/components/Interactive';
+import { Discussion } from '@/components/Discussion';
 import { Footer } from '@/components/Footer';
 import { ChatWidget } from '@/components/ChatWidget';
 import { Analytics } from '@vercel/analytics/react';
@@ -13,15 +13,17 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      {/* Main content sections of the portfolio */}
       <main>
         <Hero />
         <About />
         <TechStack />
         <Projects />
         <Achievements />
-        <Interactive />
+        <Discussion />
       </main>
       <Footer />
+      {/* Chat widget for real-time interaction */}
       <ChatWidget />
       <Analytics />
     </div>
