@@ -43,7 +43,7 @@ export async function getGitHubContributionsData(
   if (!response.ok) {
     if (response.status === 404) {
       throw new Error(`Username ko: '${username}' not found`);
-    } 
+    }
     throw new Error(`API error shit ${response.status}`);
   }
 
