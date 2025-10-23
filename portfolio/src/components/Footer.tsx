@@ -29,7 +29,7 @@ export function Footer() {
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/5 dark:from-white/5 to-transparent"></div>
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-12 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
           {/* Logo and description */}
           <div className="text-center md:text-left">
