@@ -1,6 +1,6 @@
 // TODO: API route to handle chat messages and interact with Gemini API
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { GEMINI_API_CONFIG, SYSTEM_PROMPT } from '../src/lib/gemini-config';
+import { GEMINI_API_CONFIG, SYSTEM_PROMPT } from '../src/lib/gemini-config.js';
 
 type RequestBody = {
   message: string;
