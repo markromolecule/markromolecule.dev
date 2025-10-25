@@ -6,7 +6,16 @@ export function ChatToggle() {
   const { toggleChat } = useChatStore();
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
+    <div className={cn(
+      // Base positioning (mobile)
+      'fixed bottom-4 right-4 z-50',
+      // Small screens and up
+      'sm:bottom-6 sm:right-6',
+      // Medium screens (iPad/Tablet)
+      'md:bottom-6 md:right-6',
+      // Large screens
+      'lg:bottom-8 lg:right-8'
+    )}>
       <div className="absolute -top-6 right-2 text-2xl transform rotate-12 pointer-events-none">
         👑
       </div>

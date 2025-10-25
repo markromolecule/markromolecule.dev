@@ -5,6 +5,7 @@ import { ChatHeader } from './chat/ChatHeader';
 import { ChatMessages } from './chat/ChatMessages';
 import { ChatInput } from './chat/ChatInput';
 import { ChatToggle } from './chat/ChatToggle';
+import { cn } from '@/lib/utils';
 
 export function ChatWidget() {
   const [inputText, setInputText] = useState('');
@@ -74,12 +75,35 @@ export function ChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
+    <div className={cn(
+      // Base positioning (mobile)
+      'fixed bottom-4 right-4 z-50',
+      // Small screens and up
+      'sm:bottom-6 sm:right-6',
+      // Medium screens 
+      'md:bottom-6 md:right-6',
+      // Large screens
+      'lg:bottom-8 lg:right-8'
+    )}>
       <div className="absolute -top-6 right-2 text-2xl transform rotate-12 pointer-events-none">
         👑
       </div>
 
-      <div className="w-[calc(100vw-2rem)] h-[calc(100vh-2rem)] flex flex-col bg-white rounded-lg shadow-lg border border-gray-200 animate-in slide-in-from-bottom-4 duration-300 sm:w-80 sm:h-96 md:w-96 md:h-[500px] lg:w-[28rem] lg:h-[600px] sm:max-h-[calc(100vh-3rem)] dark:bg-gray-900 dark:border-gray-700">
+      <div className={cn(
+        // Base styles (mobile)
+        'flex flex-col w-80 h-[500px] bg-white rounded-lg shadow-lg border border-gray-200',
+        // Small screens (sm) - 640px+
+        'sm:w-80 sm:h-[420px]',
+        // Medium screens (md) - 768px+
+        'md:w-96 md:h-[480px]',
+        // Large screens (lg) - 1024px+
+        'lg:w-[400px] lg:h-[520px]',
+        // Max height constraints for all screens
+        'max-h-[calc(100vh-8rem)]',
+        // Animation and dark mode
+        'animate-in slide-in-from-bottom-4 duration-300',
+        'dark:bg-gray-900 dark:border-gray-700'
+      )}>
         <ChatHeader />
         <ChatMessages />
         <ChatInput
