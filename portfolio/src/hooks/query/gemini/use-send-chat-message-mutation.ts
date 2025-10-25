@@ -30,6 +30,7 @@ async function sendChatMessage(data: ChatMessageData): Promise<ChatMessageRespon
 
     return await response.json();
   } catch (error) {
+    
     // For development, return a mock response when API is not available
     if (error instanceof Error && error.message.includes('404')) {
       return {
