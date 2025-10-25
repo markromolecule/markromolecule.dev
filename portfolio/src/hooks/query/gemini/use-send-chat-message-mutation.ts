@@ -33,7 +33,7 @@ async function sendChatMessage(data: ChatMessageData): Promise<ChatMessageRespon
     // For development, return a mock response when API is not available
     if (error instanceof Error && error.message.includes('404')) {
       return {
-        response: "I'm Joseph's AI assistant! I can help you learn about his skills, projects, and experience. However, the chat API is not currently available in development mode. Please check the server configuration.",
+        response: "The chat API is not currently available in development mode. Please check the server configuration.",
         success: true,
       };
     }
