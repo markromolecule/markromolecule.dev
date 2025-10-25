@@ -18,6 +18,7 @@ export type PostChatMessageResponse = {
 
 // Function para sa pag post ng message sa Gemini API
 export async function postChatMessage(args: PostChatMessageData): Promise<PostChatMessageResponse> {
+    const { message, conversationHistory = [] } = args;
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
@@ -31,23 +32,27 @@ export async function postChatMessage(args: PostChatMessageData): Promise<PostCh
     3. Current user message
     */
     const conversationContext = [
-        { role: 'user', content: SYSTEM_PROMPT }, // Start
-        ...(args.conversationHistory || []), // Previous history
-        { role: 'user', content: args.message }, // Current message
+        { role: 'system', parts: [{ text: SYSTEM_PROMPT }] }, 
+        ...conversationHistory.map(msg => ({
+            role: msg.role,
+            parts: [{ text: msg.content }],
+        })),
+        { role: 'user', parts: [{ text: message }] },
     ];
 
     const contents = conversationContext.map(msg => ({
+        // Gemini expects "user" or "model"
         role: msg.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: msg.content }],
+        parts: msg.parts,
     }));
 
+    // Make HTTP request to Gemini API
     const response = await fetch(`${GEMINI_API_CONFIG.baseUrl}?key=${apiKey}`, {
         method: 'POST',
         headers: GEMINI_API_CONFIG.header,
         body: JSON.stringify({ contents }),
     });
 
-    // Make HTTP request to Gemini API
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(`mali yung api token: ${response.status} - ${errorData.error?.message || response.statusText}`);
@@ -64,5 +69,4 @@ export async function postChatMessage(args: PostChatMessageData): Promise<PostCh
         response: apiResponse,
         success: true,
     };
-    
 }

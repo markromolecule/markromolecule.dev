@@ -30,7 +30,9 @@ export default async function handler(
     });
     return res.status(200).json(result);
   } catch (error) {
+    
     console.error('api error:', error);
+    
     return res.status(500).json({
       response: 'trouble connecting to server',
       success: false,
