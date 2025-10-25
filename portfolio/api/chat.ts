@@ -12,6 +12,17 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ 
       response: 'Method not allowed',
@@ -21,6 +32,7 @@ export default async function handler(
   }
 
   try {
+    console.log('Chat API handler called, method:', req.method);
     const apiKey = process.env.GEMINI_API_KEY;
     
     if (!apiKey) {
@@ -31,6 +43,8 @@ export default async function handler(
         error: 'API key not configured',
       });
     }
+
+    console.log('API key found, length:', apiKey.length);
 
     // Parse request body
     const body = req.body as Partial<RequestBody>;
@@ -61,6 +75,7 @@ export default async function handler(
     }));
 
     // Make request to Gemini API
+    console.log('Making request to Gemini API...');
     const response = await fetch(
       `${GEMINI_API_CONFIG.baseUrl}?key=${apiKey}`,
       {
@@ -69,6 +84,8 @@ export default async function handler(
         body: JSON.stringify({ contents }),
       }
     );
+
+    console.log('Gemini API response status:', response.status);
 
     // Handle non-OK responses
     if (!response.ok) {
