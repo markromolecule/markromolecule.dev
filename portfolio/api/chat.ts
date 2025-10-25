@@ -57,8 +57,17 @@ export default async function handler(
     
     console.error('api error:', error);
     
+    // Check if it's an environment variable issue
+    if (error instanceof Error && error.message.includes('hindi defined yung api key')) {
+      return res.status(500).json({
+        response: 'The chat service is temporarily unavailable due to configuration issues. Please contact Joseph directly at livadomc@gmail.com for assistance.',
+        success: false,
+        error: 'GEMINI_API_KEY environment variable not configured',
+      });
+    }
+    
     return res.status(500).json({
-      response: 'trouble connecting to server',
+      response: 'I\'m experiencing some technical difficulties. Please try again later or contact Joseph directly at livadomc@gmail.com.',
       success: false,
       error: error instanceof Error ? error.message : 'unknown error',
     });

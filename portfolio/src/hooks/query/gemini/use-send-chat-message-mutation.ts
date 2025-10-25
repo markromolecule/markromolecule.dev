@@ -25,18 +25,35 @@ async function sendChatMessage(data: ChatMessageData): Promise<ChatMessageRespon
     });
 
     if (!response.ok) {
+      // Handle different error scenarios
+      if (response.status === 404) {
+        return {
+          response: "Hi! I'm Joseph's AI assistant. The chat API is currently not available in development mode. In the deployed version, I can help you learn about Joseph's skills, projects, and experience as a developer. Feel free to explore the portfolio in the meantime!",
+          success: true,
+        };
+      }
+      
+      if (response.status === 500) {
+        return {
+          response: "I'm experiencing some technical difficulties right now. This might be due to API configuration issues. Please try again later or contact Joseph directly at livadomc@gmail.com for immediate assistance.",
+          success: false,
+          error: 'Server error - please check API configuration and environment variables',
+        };
+      }
+      
       throw new Error(`API error: ${response.status}`);
     }
 
     return await response.json();
   } catch (error) {
-    
-    // For development, return a mock response when API is not available
-    if (error instanceof Error && error.message.includes('404')) {
-      return {
-        response: "The chat API is not currently available in development mode. Please check the server configuration.",
-        success: true,
-      };
+    // Handle network errors or other fetch failures
+    if (error instanceof Error) {
+      if (error.message.includes('404') || error.message.includes('fetch')) {
+        return {
+          response: "Hi! I'm Joseph's AI assistant. The chat API is currently not available in development mode. In the deployed version, I can help you learn about Joseph's skills, projects, and experience as a developer. Feel free to explore the portfolio in the meantime!",
+          success: true,
+        };
+      }
     }
     throw error;
   }
