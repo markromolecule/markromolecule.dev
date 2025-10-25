@@ -1,66 +1,102 @@
-// TODO: API Handler for Gemini Chat Messages
+// TODO: API route to handle chat messages and interact with Gemini API
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { processChatMessageService } from '../src/services/chat/process-chat-message-service';
-import type { ProcessChatMessageServiceArgs } from '../src/services/chat/process-chat-message-service';
+import { GEMINI_API_CONFIG, SYSTEM_PROMPT } from '../src/lib/gemini-config';
 
 type RequestBody = {
   message: string;
-  conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }>;
+  conversationHistory?: Array<{ role: 'user' | 'assistant'; content: string }>;
 };
 
+// API route handler for chat messages
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ 
+      response: 'Method not allowed',
+      success: false,
+      error: 'Method not allowed' 
+    });
   }
 
   try {
-    const rawBody = req.body;
-    let parsedBody: Partial<RequestBody> = {};
-
-    if (!rawBody) {
-      // Try to parse raw text body if available on the request
-      const r = req as unknown as { rawBody?: string; bodyRaw?: string };
-      const txt = r.rawBody || r.bodyRaw || '';
-
-      if (typeof txt === 'string' && txt.trim()) {
-        try {
-          parsedBody = JSON.parse(txt);
-        } catch {
-          // ignore - im just debugging here
-        }
-      }
-    } else if (typeof rawBody === 'string') {
-      try {
-        parsedBody = JSON.parse(rawBody);
-      } catch {
-        // ignore - debugging again
-      }
-    } else {
-      parsedBody = rawBody as Partial<RequestBody>;
+    const apiKey = process.env.GEMINI_API_KEY;
+    
+    if (!apiKey) {
+      console.error('GEMINI_API_KEY is not configured');
+      return res.status(500).json({
+        response: 'Server configuration error',
+        success: false,
+        error: 'API key not configured',
+      });
     }
 
-    const message = parsedBody.message;
-    const conversationHistory = parsedBody.conversationHistory || [];
+    // Parse request body
+    const body = req.body as Partial<RequestBody>;
+    const message = body?.message;
+    const conversationHistory = body?.conversationHistory || [];
 
     if (!message || typeof message !== 'string') {
-      console.warn('Invalid request body for /api/chat:', parsedBody);
-      return res.status(400).json({ error: 'invalid message format' });
+      return res.status(400).json({ 
+        response: 'Invalid request',
+        success: false,
+        error: 'Invalid message format' 
+      });
     }
 
-  const args: ProcessChatMessageServiceArgs = { message, conversationHistory } as ProcessChatMessageServiceArgs;
-  const result = await processChatMessageService(args);
-    return res.status(200).json(result);
+    // Prepare conversation context
+    const conversationContext = [
+      { role: 'user', parts: [{ text: SYSTEM_PROMPT }] },
+      ...conversationHistory.map(msg => ({
+        role: msg.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: msg.content }],
+      })),
+      { role: 'user', parts: [{ text: message }] },
+    ];
+
+    const contents = conversationContext.map(msg => ({
+      role: msg.role === 'assistant' ? 'model' : 'user',
+      parts: msg.parts,
+    }));
+
+    // Make request to Gemini API
+    const response = await fetch(
+      `${GEMINI_API_CONFIG.baseUrl}?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: GEMINI_API_CONFIG.header,
+        body: JSON.stringify({ contents }),
+      }
+    );
+
+    // Handle non-OK responses
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`Gemini API error: ${response.status} - ${errorData.error?.message || response.statusText}`);
+    }
+
+    const data = await response.json();
+    const apiResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!apiResponse) {
+      throw new Error('No response from Gemini API');
+    }
+
+    // Successful response
+    return res.status(200).json({
+      response: apiResponse,
+      success: true,
+    });
+
   } catch (error) {
+    console.error('API handler error:', error);
     
-    console.error('api error:', error);
-    
+    // Handles error code 500
     return res.status(500).json({
-      response: 'trouble connecting to server',
+      response: "I'm having trouble connecting right now. Please try again later.",
       success: false,
-      error: error instanceof Error ? error.message : 'unknown error',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 }

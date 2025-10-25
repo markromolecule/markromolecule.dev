@@ -74,12 +74,12 @@ export function ChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
       <div className="absolute -top-6 right-2 text-2xl transform rotate-12 pointer-events-none">
         👑
       </div>
 
-      <div className="w-80 sm:w-96 h-[500px] flex flex-col bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 animate-in slide-in-from-bottom-4 duration-300 max-h-[calc(100vh-3rem)] max-w-[calc(100vw-3rem)]">
+      <div className="w-[calc(100vw-2rem)] h-[calc(100vh-2rem)] flex flex-col bg-white rounded-lg shadow-lg border border-gray-200 animate-in slide-in-from-bottom-4 duration-300 sm:w-80 sm:h-96 md:w-96 md:h-[500px] lg:w-[28rem] lg:h-[600px] sm:max-h-[calc(100vh-3rem)] dark:bg-gray-900 dark:border-gray-700">
         <ChatHeader />
         <ChatMessages />
         <ChatInput
