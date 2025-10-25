@@ -1,4 +1,3 @@
-// PROPS => PROPERTIES
 export const GISCUS_CONFIG = {
   repo: 'markromolecule/markromolecule.dev',
   repoId: 'R_kgDOP-Bd6Q',

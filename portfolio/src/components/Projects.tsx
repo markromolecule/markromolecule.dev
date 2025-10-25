@@ -72,9 +72,9 @@ export function Projects() {
                 
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
+                    {project.technologies.map((tech, techIndex) => (
                         <span
-                          key={tech}
+                          key={`${project.title}-${tech}-${techIndex}`}
                           className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full font-medium"
                         >
                           {tech}

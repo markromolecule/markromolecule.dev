@@ -88,8 +88,8 @@ export function GitHubActivity({ username, className }: GitHubActivityProps) {
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
         {/* Day Headers */}
         <div className="grid grid-cols-7 mb-3" style={{ gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px' }}>
-          {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) => (
-            <div key={day} className="text-xs font-medium text-gray-500 dark:text-gray-400 text-center">
+          {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+            <div key={`day-${index}`} className="text-xs font-medium text-gray-500 dark:text-gray-400 text-center">
               {day}
             </div>
           ))}

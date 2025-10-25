@@ -51,7 +51,7 @@ export const useChatStore = create(
       set((state) => {
         const newMessage: Message = {
           ...message,
-          id: Date.now().toString(),
+          id: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}-${state.messages.length}-${Math.random().toString(36).substr(2, 5)}`,
           timestamp: new Date(),
         };
         state.messages.push(newMessage);
