@@ -4,9 +4,8 @@
 
 /**
  * Number of months to look back for contribution data
- * Show only the last 2 months instead of full year
  */
-export const CONTRIBUTION_LOOKBACK_MONTHS = 2;
+export const CONTRIBUTION_LOOKBACK_MONTHS = 1;
 
 /**
  * Maximum number of events to fetch from GitHub API
@@ -17,7 +16,7 @@ export const MAX_GITHUB_EVENTS = 100;
  * Minimum contributions required for a day to count
  * Only count days with at least 2 contributions
  */
-export const MIN_CONTRIBUTIONS_THRESHOLD = 2;
+export const MIN_CONTRIBUTIONS_THRESHOLD = 1;
 
 /**
  * GitHub event types that count as contributions
