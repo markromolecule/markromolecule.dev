@@ -7,7 +7,7 @@ interface GitHubActivityProps {
 }
 
 export function GitHubActivity({ username, className }: GitHubActivityProps) {
-  const { data, isLoading, error } = useGitHubContributionsQuery({ username });
+  const { data, isLoading, error } = useGitHubContributionsQuery({ payload: { username } });
 
   if (isLoading) {
     return (
