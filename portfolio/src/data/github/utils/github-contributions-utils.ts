@@ -1,5 +1,5 @@
 import { type GitHubContribution, type GitHubEvent } from '../types/github-contributions-types';
-import { CONTRIBUTION_LEVELS } from '../constants/github-contributions-constants';
+import { CONTRIBUTION_LEVELS } from '../../constants/github-contributions-constants';
 
 // ----------------------------
 // Type Guard

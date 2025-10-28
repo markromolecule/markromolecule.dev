@@ -1,7 +1,7 @@
 import { type GetGitHubContributionsDataArgs, type GetGitHubContributionsDataResponse } from './types/github-contributions-types';
 import { processGitHubEvents } from './process-github-events';
 import { handleGitHubApiResponse } from './utils/github-api-errors';
-import { MAX_GITHUB_EVENTS } from './constants/github-contributions-constants';
+import { MAX_GITHUB_EVENTS } from '../constants/github-contributions-constants';
 
 // ----------------------------
 // Main Function
