@@ -20,6 +20,17 @@ export const GEMINI_API_CONSTANTS = {
         INTERNAL_SERVER_ERROR: 500,
     },
 
+    // HTTP Methods
+    HTTP_METHODS: {
+        GET: 'GET',
+        POST: 'POST',
+        PUT: 'PUT',
+        DELETE: 'DELETE',
+        PATCH: 'PATCH',
+        OPTIONS: 'OPTIONS',
+        HEAD: 'HEAD',
+    },
+
     // API roles
     ROLES: {
         USER: 'user' as const,
@@ -33,7 +44,14 @@ export const GEMINI_API_CONSTANTS = {
         SUCCESS: true,
         EMPTY_RESPONSE: '',
         DEFAULT_ERROR_MESSAGE: 'An unexpected error occurred.',
+    },
+
+    // Request Configurations
+    REQUEST: {
+        TIMEOUT_MS: 30000,
+        RETRY_ATTEMPTS: 3,
     }
+
 } as const;
 
 // Environment Constants
@@ -46,4 +64,11 @@ export const GEMINI_ENV_CONSTANTS = {
 export const GEMINI_HEADER = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
+} as const;
+
+export const RESPONSE_KEYS = {
+    RESPONSE: 'response',
+    SUCCESS: 'success',
+    ERROR: 'error',
+    CONTENTS: 'contents',
 } as const;
