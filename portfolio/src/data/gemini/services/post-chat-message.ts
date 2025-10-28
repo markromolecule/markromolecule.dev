@@ -1,7 +1,7 @@
 import { GEMINI_API_CONFIG } from "@/lib/gemini-config";
-import { type PostChatMessageData, type PostChatMessageResponse } from "./types/gemini-chat-types";
-import { handleGeminiApiResponse } from "./utils/gemini-api-errors";
-import { transformConversationToGeminiFormat, extractGeminiResponse, validateDevelopmentConfig, } from "./utils/gemini-data-utils";
+import { type PostChatMessageData, type PostChatMessageResponse } from "../types/gemini-chat-types";
+import { handleGeminiApiResponse } from "../utils/gemini-api-errors";
+import { transformConversationToGeminiFormat, extractGeminiResponse, validateDevelopmentConfig, } from "../utils/gemini-data-utils";
 import { GEMINI_API_CONSTANTS, GEMINI_ENV_CONSTANTS, GEMINI_HEADER, RESPONSE_KEYS } from "@/data/constants/gemini-api-constants";
 
 // Destructure constants for easier access
@@ -10,7 +10,7 @@ const { CHAT_ENDPOINT } = GEMINI_ENV_CONSTANTS;
 const { RESPONSE, SUCCESS, ERROR } = RESPONSE_KEYS;
 
 // Sends a chat message to the Gemini API and returns the response
-export async function postChatMessage( args: PostChatMessageData ): Promise<PostChatMessageResponse> {
+export async function postChatMessageData( args: PostChatMessageData ): Promise<PostChatMessageResponse> {
   const isDevelopment = import.meta.env.DEV;
   if (isDevelopment) {
     return await callGeminiDirectly(args);

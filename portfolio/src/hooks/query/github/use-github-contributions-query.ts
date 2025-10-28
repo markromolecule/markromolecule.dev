@@ -3,7 +3,7 @@ import {
   getGitHubContributionsData, 
   type GetGitHubContributionsDataArgs,
   type GetGitHubContributionsDataResponse 
-} from '@/data/github/get-github-contributions';
+} from '@/data/github/services/get-github-contributions';
 
 // ----------------------------
 // Query Hook Types
