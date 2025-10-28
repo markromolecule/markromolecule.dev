@@ -1,5 +1,5 @@
 import { type MutationOptions, useMutation } from '@tanstack/react-query';
-import { postChatMessage } from '@/data/gemini/post-chat-message';
+import { postChatMessageData } from '@/data/gemini/services/post-chat-message';
 import { type PostChatMessageData, type PostChatMessageResponse } from '@/data/gemini/types/gemini-chat-types';
 
 // Re-export the imported types for easier reference and consistent naming
@@ -17,7 +17,7 @@ export type UseSendChatMessageMutationArgs = MutationOptions<
 export function useSendChatMessageMutation(args: UseSendChatMessageMutationArgs = {}) {
   return useMutation({
     ...args,
-    mutationFn: postChatMessage,
+    mutationFn: postChatMessageData,
     onError: (error: Error, variables: ChatMessageData, context, meta) => {
       console.error('Chat mutation error:', error);
 

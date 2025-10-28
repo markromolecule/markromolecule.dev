@@ -9,7 +9,7 @@ import {
   CONTRIBUTION_LOOKBACK_MONTHS, 
   MIN_CONTRIBUTIONS_THRESHOLD, 
   RELEVANT_EVENT_TYPES 
-} from './constants/github-contributions-constants';
+} from '../constants/github-contributions-constants';
 
 // ----------------------------
 // Event Processing
