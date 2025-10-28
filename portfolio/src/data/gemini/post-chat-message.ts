@@ -1,95 +1,75 @@
-// TODO: Post Function to send chat message to Gemini API
-import { GEMINI_API_CONFIG, SYSTEM_PROMPT } from "@/lib/gemini-config";
+import { GEMINI_API_CONFIG } from "@/lib/gemini-config";
+import { type PostChatMessageData, type PostChatMessageResponse, } from "./types/gemini-chat-types";
+import { handleGeminiApiResponse } from "./utils/gemini-api-errors";
+import { transformConversationToGeminiFormat, extractGeminiResponse, validateDevelopmentConfig } from "./utils/gemini-data-utils";
 
-// Payload type for postChatMessage function
-export type PostChatMessageData = {
-    message: string;
-    conversationHistory?: Array<{ 
-        role: 'user' | 'system' | 'assistant'; content: string 
-    }>;
-};
-
-// Response type from postChatMessage function
-export type PostChatMessageResponse = {
-    response: string;
-    success: boolean;
-    error?: string;
-};
-
-export async function postChatMessage(args: PostChatMessageData): Promise<PostChatMessageResponse> {
-    const { message, conversationHistory = [] } = args;
-    
-    // Check if running in development mode
+export async function postChatMessage(
+  args: PostChatMessageData
+): Promise<PostChatMessageResponse> {
     const isDevelopment = import.meta.env.DEV;
-    if (isDevelopment) { 
-        // Development: Call Gemini API directly from browser
-        return await callGeminiDirectly({ message, conversationHistory });
-    }
     
-    // Production: Use secure serverless API endpoint
-    const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            message,
-            conversationHistory,
-        }),
-    });
-
-    // Handle non-OK responses
-    if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-    }
-    return await response.json();
+    if (isDevelopment) {
+        return await callGeminiDirectly(args);
+    } return await callGeminiViaServerlessAPI(args);
 }
 
-async function callGeminiDirectly(args: PostChatMessageData): Promise<PostChatMessageResponse> {
-    const { message, conversationHistory = [] } = args;
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+async function callGeminiViaServerlessAPI(
+  args: PostChatMessageData
+): Promise<PostChatMessageResponse> {
+  const { message, conversationHistory } = args;
 
-    // Ensure API key is available
-    if (!apiKey) {
-        throw new Error('VITE_GEMINI_API_KEY not configured for development. Please add it to your .env file.');
-    }
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message,
+      conversationHistory,
+    }),
+  });
 
-    // Prepare conversation context
-    const conversationContext = [
-        { role: 'system', parts: [{ text: SYSTEM_PROMPT }] }, 
-        ...conversationHistory.map(msg => ({
-            role: msg.role,
-            parts: [{ text: msg.content }],
-        })),
-        { role: 'user', parts: [{ text: message }] },
-    ];
+  // Use standardized error handling
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    handleGeminiApiResponse(response, errorData);
+  }
 
-    // Map conversation context to API request format
-    const contents = conversationContext.map(msg => ({
-        role: msg.role === 'assistant' ? 'model' : 'user',
-        parts: msg.parts,
-    }));
+  const data = await response.json();
 
-    // Make request to Gemini API
-    const response = await fetch(`${GEMINI_API_CONFIG.baseUrl}?key=${apiKey}`, {
-        method: 'POST',
-        headers: GEMINI_API_CONFIG.header,
-        body: JSON.stringify({ contents }),
-    });
+  return {
+    response: data.response || "",
+    success: data.success ?? true,
+    error: data.error,
+  };
+}
 
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(`Gemini API error: ${response.status} - ${errorData.error?.message || response.statusText}`);
-    }
+async function callGeminiDirectly(
+  args: PostChatMessageData
+): Promise<PostChatMessageResponse> {
+  // Validate configuration
+  const apiKey = validateDevelopmentConfig();
 
-    // Parse response from Gemini API
-    const data = await response.json();
-    const apiResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    
-    if (!apiResponse) {
-        throw new Error('No response from Gemini API'); 
-    }
+  // Transform data using utility
+  const contents = transformConversationToGeminiFormat(args);
 
-    return {
-        response: apiResponse,
-        success: true,
-    };
+  // Make API request
+  const response = await fetch(`${GEMINI_API_CONFIG.baseUrl}?key=${apiKey}`, {
+    method: "POST",
+    headers: GEMINI_API_CONFIG.header,
+    body: JSON.stringify({ contents }),
+  });
+
+  // Handle errors using standardized utility
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    handleGeminiApiResponse(response, errorData);
+  }
+
+  // Parse and validate response
+  const data = await response.json();
+  const apiResponse = extractGeminiResponse(data);
+
+  return {
+    response: apiResponse,
+    success: true,
+  };
 }
