@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useAchievementsStore } from '@/stores/use-achievements-store';
+import { useAchievementsStore } from '@/stores/achievements/use-achievements-store';
 
 export function Achievements() {
   const achievements = useAchievementsStore(state => state.achievements);

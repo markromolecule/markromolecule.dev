@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import { techIcons } from '@/lib/tech-icons';
 import { cn } from '@/lib/utils';
-import { useTechStackStore } from '@/stores/use-tech-stack';
+import { useTechStackStore } from '@/stores/tech-stack/use-tech-stack-store';
 
 interface TechStackModalProps {
   isOpen: boolean;
