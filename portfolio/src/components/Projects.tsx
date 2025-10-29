@@ -2,11 +2,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ExternalLink, Github } from 'lucide-react';
-import { useProjectStore } from '@/stores/use-projects-store';
+import { useProjectsStore } from '@/stores/project/use-projects-store';
 import { useExternalLinkDialog } from '@/hooks/global/use-external-link-dialog';
 
 export function Projects() {
-  const projects = useProjectStore(state => state.projects);
+  const projects = useProjectsStore(state => state.projects);
   const { 
     dialogOpen, 
     setDialogOpen,    

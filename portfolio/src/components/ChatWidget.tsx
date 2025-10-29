@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useChatStore } from '@/stores/use-chat-store';
+import { useChatStore } from '@/stores/gemini/use-chat-store';
 import { useSendChatMessageMutation, type ChatMessageResponse } from '@/hooks/query/gemini/use-send-chat-message-mutation';
 import { ChatHeader } from './chat/ChatHeader';
 import { ChatMessages } from './chat/ChatMessages';

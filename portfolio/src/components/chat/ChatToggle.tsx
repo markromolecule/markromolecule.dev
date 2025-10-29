@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { useChatStore } from '@/stores/use-chat-store';
+import { useChatStore } from '@/stores/gemini/use-chat-store';
 import { cn } from '@/lib/utils';
 
 export function ChatToggle() {

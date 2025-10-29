@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { X, Bot } from 'lucide-react';
-import { useChatStore } from '@/stores/use-chat-store';
+import { useChatStore } from '@/stores/gemini/use-chat-store';
 import { cn } from '@/lib/utils';
 
 export function ChatHeader() {

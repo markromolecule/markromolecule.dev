@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useUiStore } from "@/stores/use-ui-store";
+import { useUiStore } from "@/stores/ui/use-ui-store";
 import { GISCUS_CONFIG } from "@/lib/giscus-config";
 
 export function useGiscus() {

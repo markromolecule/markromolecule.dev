@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useUiStore } from '@/stores/use-ui-store';
+import { useUiStore } from '@/stores/ui/use-ui-store';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 

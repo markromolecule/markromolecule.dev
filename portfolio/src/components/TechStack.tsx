@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { TechStackModal } from './TechStackModal';
 import { cn } from '@/lib/utils';
 import { ChevronRight } from 'lucide-react';
-import { useTechStackStore } from '@/stores/use-tech-stack';
+import { useTechStackStore } from '@/stores/tech-stack/use-tech-stack-store';
 
 export function TechStack() {
   const technologies = useTechStackStore(state => state.technologies);
