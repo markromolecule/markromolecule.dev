@@ -8,6 +8,7 @@ import { Discussion } from '@/components/Discussion';
 import { Footer } from '@/components/Footer';
 import { ChatWidget } from '@/components/ChatWidget';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       {/* Chat widget for real-time interaction */}
       <ChatWidget />
       <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
