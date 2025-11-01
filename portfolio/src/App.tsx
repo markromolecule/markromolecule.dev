@@ -5,10 +5,10 @@ import { TechStack } from '@/components/TechStack';
 import { Projects } from '@/components/Projects';
 import { Achievements } from '@/components/Achievements';
 import { Discussion } from '@/components/Discussion';
-import { Footer } from '@/components/Footer';
+import { Footer } from '@/components/common/Footer';
 import { ChatWidget } from '@/components/ChatWidget';
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 function App() {
   return (
