@@ -43,7 +43,7 @@ export function useGiscus() {
             },
           },
         },
-        "https://giscus.app"
+        "*"
       );
     }
   }, [isDarkMode]);
