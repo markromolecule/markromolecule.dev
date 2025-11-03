@@ -26,6 +26,8 @@ export function processGitHubEvents(
   // Show only the last 2 months instead of full year
   const endDate = new Date();
   const startDate = new Date();
+  
+  // Subtract 2 months from end date
   startDate.setMonth(endDate.getMonth() - CONTRIBUTION_LOOKBACK_MONTHS);
   
   // Map to store contribution counts per date
@@ -34,9 +36,9 @@ export function processGitHubEvents(
   // Loop through events and collect push events by date
   events.forEach(event => {
     if (isGitHubEvent(event) && event.actor?.login === username) {
+      // Convert event date to ISO string
       const eventDate = new Date(event.created_at);
       const dateStr = eventDate.toISOString().split('T')[0];
-      
       // Filter only events within date range
       if (eventDate >= startDate && eventDate <= endDate) {
         // Only count actual code pushes
@@ -51,6 +53,7 @@ export function processGitHubEvents(
   const contributions: GitHubContribution[] = [];
   const currentDate = new Date(startDate);
   
+  // Loop through each day and calculate contribution level
   while (currentDate <= endDate) {
     const dateStr = currentDate.toISOString().split('T')[0];
     const rawCount = contributionMap.get(dateStr) || 0;
