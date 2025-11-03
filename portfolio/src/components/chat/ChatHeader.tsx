@@ -13,12 +13,12 @@ export function ChatHeader() {
       'border-b border-gray-200 dark:border-gray-700',
       'bg-black text-white rounded-t-lg'
     )}>
-      // User avatar and name
+      {/* User avatar and name */}
       <div className="flex items-center gap-2">
         <Bot className="h-5 w-5" />
         <h3 className="font-semibold">Joseph</h3>
       </div>
-      // Close button
+      {/* Close button */}
       <Button
         variant="ghost"
         size="sm"
