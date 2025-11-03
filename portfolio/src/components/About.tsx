@@ -44,8 +44,8 @@ export function About() {
 
             </p>
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-             When I'm not coding, I enjoy exploring new technologies, building personal projects, 
-             and continuously learning to stay up-to-date with the latest trends in mobile & web development.
+              When I'm not coding, I enjoy exploring new technologies, building personal projects, 
+              and continuously learning to stay up-to-date with the latest trends in mobile & web development.
             </p>
             
             {/* GitHub Activity Section */}
