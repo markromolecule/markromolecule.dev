@@ -6,7 +6,7 @@ export const DEFAULT_PROJECTS_STORE_STATE: ProjectsStoreState = {
     projects: [
         {
             id: "1",
-            title: "LakbAI",
+            title: "EHM-J Enterprises",
             description: "The project aims to modernize traditional jeepney transportation through a QR code–based checkpoint and fare system, enhanced with AI features for route prediction and fare optimization. Features include user authentication, QR code scanning, and payment integration.",
             technologies: ['React Native', 'Laravel', 'MySQL', 'Xendit'],
             github: 'https://github.com/markromolecule/LakbAI',
