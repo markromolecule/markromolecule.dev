@@ -1,140 +1,86 @@
-import { Button } from '@/components/ui/button';
-import { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
-import { certifications, fontFamilies } from '@/components/common/constants/hero-constants';
+import { ArrowUpRight, Copy, Github, Linkedin, Award } from 'lucide-react';
 
-export function Hero() {
-  const [currentFont, setCurrentFont] = useState('font-bold');
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * fontFamilies.length);
-      setCurrentFont(fontFamilies[randomIndex]);
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const scrollToProjects = () => {
-    const element = document.querySelector('#projects');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
+export default function Hero() {
   return (
-        <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
-          {/* Background Design Elements */}
-          <div className="absolute inset-0">
-            {/* Geometric shapes */}
-            <div className="absolute top-20 left-10 w-32 h-32 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-xl opacity-60"></div>
-            <div className="absolute top-40 right-20 w-24 h-24 bg-cyan-100 dark:bg-cyan-900/20 rounded-full blur-lg opacity-50"></div>
-            <div className="absolute bottom-32 left-1/4 w-20 h-20 bg-purple-100 dark:bg-purple-900/20 rounded-full blur-md opacity-40"></div>
-            <div className="absolute bottom-20 right-1/3 w-16 h-16 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-sm opacity-30"></div>
-            
-            {/* Subtle grid pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:50px_50px] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]"></div>
-            
-            {/* Animated floating elements */}
-            <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-blue-400 dark:bg-blue-500 rounded-full opacity-60 animate-pulse"></div>
-            <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-cyan-400 dark:bg-cyan-500 rounded-full opacity-40 animate-ping"></div>
-            <div className="absolute bottom-1/3 left-1/5 w-1.5 h-1.5 bg-purple-400 dark:bg-purple-500 rounded-full opacity-50 animate-bounce"></div>
+    <section className="min-h-screen flex flex-col justify-center px-6 pt-20 pb-12 md:pt-24 max-w-4xl mx-auto">
+      <div className="space-y-6">
+        <div className="flex flex-col items-start gap-4">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight leading-tight">
+            markromolecule <br />
+            builds ideas
+          </h1>
+        </div>
+
+        <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+          I'm Joseph, a developer who builds efficient, scalable, and user-centered applications.
+          I turn concepts into shipping products.
+        </p>
+
+        <div className="pt-4 flex flex-col gap-6">
+          <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
+            <a href="#projects" className="w-fit group flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-transparent hover:bg-white/5 transition-colors text-base font-medium">
+              View Projects
+              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span>Or send me an email at →</span>
+              <button
+                className="flex items-center gap-1.5 text-white hover:text-white/80 transition-colors group"
+                onClick={() => navigator.clipboard.writeText('livadomc@gmail.com')}
+              >
+                livadomc@gmail.com
+                <Copy className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
+              </button>
+            </div>
           </div>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div className="space-y-8">
+        </div>
+
+        {/* Quote Section */}
+        <div className="mt-20 pt-10 border-t border-white/5">
+          <div className="flex gap-4 mb-4">
+            <span className="text-4xl text-white/20 font-serif">"</span>
+          </div>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            <span className="text-white">I write code,</span> and I design systems architecture. It started with side projects and turned into
+            a passion for building full products. I don't just build fast; I understand what
+            needs to be built and make sure it aligns to your business.
+          </p>
           <div className="space-y-4">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
-              Hi, I'm{' '}
-              <span className={`text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 ${currentFont} transition-all duration-500`}>
-                Joseph
-              </span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Building reliable and modern mobile & web experiences
+            <p className="text-muted-foreground">
+              "ship <strong className="text-white font-medium">efficiently</strong>, design <strong className="text-white font-medium">intuitively</strong>, and <strong className="text-white font-medium">never stop learning</strong>."
             </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-4">
+              <a
+                href="https://github.com/markromolecule"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-sm text-muted-foreground hover:text-white"
+              >
+                <Github className="w-4 h-4" />
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/mark-joseph-livado-01945b331/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-sm text-muted-foreground hover:text-white"
+              >
+                <Linkedin className="w-4 h-4" />
+                LinkedIn
+              </a>
+              <a
+                href="https://www.credly.com/badges/e5c4ce97-eabc-44c4-9453-f0e970b1977d/public_url"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 transition-colors text-sm text-blue-300"
+              >
+                <Award className="w-4 h-4" />
+                IT Specialist - Database
+              </a>
+            </div>
           </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              onClick={scrollToProjects}
-              size="lg"
-              className="text-lg px-8 py-3"
-            >
-              View My Work
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              onClick={() => {
-                const element = document.querySelector('#about');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className="text-lg px-8 py-3"
-            >
-              Learn More
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              disabled
-              className={cn(
-                // Base styles
-                'text-lg px-8 py-3',
-                // Disabled state emphasis
-                'opacity-50 cursor-not-allowed',
-                // Visual indicators for disabled state
-                'border-dashed border-2',
-                'bg-gray-50 dark:bg-gray-800',
-                'text-gray-400 dark:text-gray-500',
-                'hover:opacity-50 hover:cursor-not-allowed',
-                // Remove any hover effects
-                'hover:bg-gray-50 dark:hover:bg-gray-800',
-                'hover:border-gray-300 dark:hover:border-gray-600'
-              )}
-            >
-              Résumé
-            </Button>
-          </div>
-          
-              {/* Certifications Section */}
-              <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
-                <div className="flex flex-col items-center space-y-4">
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                    Certified Professional
-                  </p>
-                  
-                  {/* Dynamic Certifications */}
-                  <div className="flex flex-col sm:flex-row gap-4 items-center">
-                    {certifications.map((cert) => (
-                      <a 
-                        key={cert.id}
-                        href={cert.url} 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block"
-                      >
-                        <div className="flex items-center space-x-3 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 shadow-sm border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
-                          <img 
-                            src={cert.image} 
-                            alt={cert.alt} 
-                            className="w-12 h-12 object-contain"
-                          />
-                          <div className="text-left">
-                            <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                              {cert.title}
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {cert.subtitle}
-                            </p>
-                          </div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
         </div>
       </div>
     </section>

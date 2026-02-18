@@ -91,7 +91,7 @@ export function ChatWidget() {
 
       <div className={cn(
         // Base styles (mobile)
-        'flex flex-col w-80 h-[500px] bg-white rounded-lg shadow-lg border border-gray-200',
+        'flex flex-col w-80 h-[500px] bg-background/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10',
         // Small screens (sm) - 640px+
         'sm:w-80 sm:h-[420px]',
         // Medium screens (md) - 768px+
@@ -101,8 +101,7 @@ export function ChatWidget() {
         // Max height constraints for all screens
         'max-h-[calc(100vh-8rem)]',
         // Animation and dark mode
-        'animate-in slide-in-from-bottom-4 duration-300',
-        'dark:bg-gray-900 dark:border-gray-700'
+        'animate-in slide-in-from-bottom-4 duration-300'
       )}>
         <ChatHeader />
         <ChatMessages />

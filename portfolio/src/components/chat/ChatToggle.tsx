@@ -22,10 +22,10 @@ export function ChatToggle() {
       <Button
         onClick={toggleChat}
         className={cn(
-          'px-4 py-2 rounded-lg shadow-sm font-medium text-sm',
-          'bg-white border border-black text-black',
-          'hover:bg-black hover:text-white transition-all duration-200',
-          'dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:hover:bg-white dark:hover:text-black'
+          'px-5 py-3 rounded-full font-medium text-sm',
+          'bg-background/80 backdrop-blur-md border border-white/10 text-foreground',
+          'hover:bg-blue-500/10 hover:border-blue-500/20 hover:text-blue-400 transition-all duration-300',
+          'shadow-lg shadow-black/20'
         )}
       >
         Chat with Joseph
