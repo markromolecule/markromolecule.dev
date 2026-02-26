@@ -1,11 +1,10 @@
 
 const testimonials = [
      {
-          quote: "Mark is a fantastic developer who helped us build our HVAC websites. He delivers high-quality work and is very communicative and easy to work with.",
+          quote: "Mark delivered exactly what we needed. Fast execution, clear communication, and a high-quality website without any technical headaches.",
           name: "Efren Morta",
           title: "CEO, EHM-J Enterprises"
      },
-     // Add more testimonials here
 ];
 
 export default function Testimonials() {
