@@ -1,6 +1,8 @@
 const technologies = [
-     "Next.js", "TypeScript", "Hono",
-     "PostgreSQL", "MySQL", "Expo", "Git",
+     "Next.js", "TypeScript", 
+     "Hono", "Prisma", "Kysely",
+     "PostgreSQL", "MySQL", 
+     "Expo", "Git",
      "Postman", "Docker"
 ];
 

@@ -3,13 +3,13 @@ import { ArrowUpRight } from 'lucide-react';
 const projects = [
      {
           name: "EHM-J Enterprises",
-          tags: ["React", "PostgreSQL", "Tawk.to"],
+          tags: ["React", "TypeScript", "Supabase", "Tawk.to"],
           quote: "An e-commerce platform for HVAC services and products, featuring product catalogs, service booking, secure payment processing, and live chat to agent integration.",
-          url: "https://www.ehmj-enterprises.app/home"
+          url: "https://www.ehmj-enterprises.app/"
      },
      {
           name: "Sentinel PH",
-          tags: ["Next.JS", "Expo", "Hono", "MediaPipe", "LiveKit", "PostgreSQL"],
+          tags: ["Next.JS", "TypeScript", "Expo", "Hono", "MediaPipe", "LiveKit", "Supabase"],
           quote: "A mobile and web-based proctoring system with gaze tracking and audio analysis for secure on-site and remote examinations",
           url: "https://www.sentinelph.tech/"
      }
@@ -20,7 +20,6 @@ export default function Projects() {
           <section id="projects" className="py-16 md:py-24 px-6 max-w-4xl mx-auto">
                <div className="mb-12">
                     <h2 className="text-4xl md:text-5xl font-medium tracking-tight mb-4 flex items-center gap-2">
-                         <span className="text-muted-foreground text-lg font-normal">_</span>
                          featured projects
                     </h2>
                     <p className="text-muted-foreground text-lg">

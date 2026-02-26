@@ -6,7 +6,7 @@ export default function CallToAction() {
                <div className="mb-12">
                     <h2 className="text-4xl md:text-5xl font-medium tracking-tight mb-4">
                          you see what I build. <br />
-                         <span className="text-muted-foreground">_</span> let's build your idea next.
+                         let's build your idea next.
                     </h2>
                </div>
 
@@ -19,9 +19,12 @@ export default function CallToAction() {
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                          <span>Or send me an email at →</span>
                          <button
-                              className="flex items-center gap-1.5 text-white hover:text-white/80 transition-colors group"
+                              className="relative flex items-center gap-1.5 text-white hover:text-white/80 transition-colors group"
                               onClick={() => navigator.clipboard.writeText('livadomc@gmail.com')}
                          >
+                              <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded border border-white/20 bg-black/85 px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-white/80 opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0">
+                                   [click to copy]
+                              </span>
                               livadomc@gmail.com
                               <Copy className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
                          </button>

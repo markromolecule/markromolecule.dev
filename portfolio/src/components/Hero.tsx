@@ -12,8 +12,8 @@ export default function Hero() {
         </div>
 
         <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-          I'm Joseph, a developer who builds efficient, scalable, and user-centered applications.
-          I turn concepts into shipping products.
+          I'm Mark Joseph Livado, a student who builds efficient, scalable, and user-centered web applications.
+          <span className="text-white"> I turn concepts into shipping products.</span>
         </p>
 
         <div className="pt-4 flex flex-col gap-6">
@@ -26,9 +26,12 @@ export default function Hero() {
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>Or send me an email at →</span>
               <button
-                className="flex items-center gap-1.5 text-white hover:text-white/80 transition-colors group"
+                className="relative flex items-center gap-1.5 text-white hover:text-white/80 transition-colors group"
                 onClick={() => navigator.clipboard.writeText('livadomc@gmail.com')}
               >
+                <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded border border-white/20 bg-black/85 px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-white/80 opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0">
+                  [click to copy]
+                </span>
                 livadomc@gmail.com
                 <Copy className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
               </button>
@@ -39,12 +42,14 @@ export default function Hero() {
         {/* Quote Section */}
         <div className="mt-20 pt-10 border-t border-white/5">
           <div className="flex gap-4 mb-4">
-            <span className="text-4xl text-white/20 font-serif">"</span>
+            <span className="text-4xl text-white/20 font-serif font-black leading-none">
+              &rdquo;
+            </span>
           </div>
           <p className="text-muted-foreground leading-relaxed mb-6">
-            <span className="text-white">I write code,</span> and I design systems architecture. It started with side projects and turned into
-            a passion for building full products. I don't just build fast; I understand what
-            needs to be built and make sure it aligns to your business.
+            <span className="text-white">What started as a passion </span> 
+            for building side projects has grown into a drive to create a scalable solutions. 
+            I don't just build fast. I am focus on building the right product to drive your business forward.
           </p>
           <div className="space-y-4">
             <p className="text-muted-foreground">
