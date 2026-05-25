@@ -5,7 +5,6 @@ import Projects from './components/Projects';
 import Testimonials from './components/Testimonials';
 import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
-import { ChatWidget } from './components/ChatWidget';
 
 function App() {
   return (
@@ -23,7 +22,6 @@ function App() {
         <CallToAction />
         <Footer />
       </main>
-      <ChatWidget />
     </div>
   );
 }
