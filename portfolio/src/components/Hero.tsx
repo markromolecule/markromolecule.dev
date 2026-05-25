@@ -12,7 +12,7 @@ export default function Hero() {
         </div>
 
         <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-          I'm Mark Joseph Livado, a student who builds efficient, scalable, and user-centered web applications.
+          I am Mark Joseph Livado,
           <span className="text-white"> I turn concepts into shipping products.</span>
         </p>
 
@@ -47,8 +47,8 @@ export default function Hero() {
             </span>
           </div>
           <p className="text-muted-foreground leading-relaxed mb-6">
-            <span className="text-white">What started as a passion </span> 
-            for building side projects has grown into a drive to create a scalable solutions. 
+            <span className="text-white">What started as a passion </span>
+            for building side projects has grown into a drive to create a scalable solutions.
             I don't just build fast. I am focus on building the right product to drive your business forward.
           </p>
           <div className="space-y-4">
